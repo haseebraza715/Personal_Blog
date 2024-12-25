@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <h1>Admin Dashboard</h1>
+    <a href="{{ url_for('new_article') }}">+ Add New Article</a>
+    <ul>
+      {% for article in articles %}
+      <li>
+        {{ article['titleh'] }} - {{ article['date'] }}
+        <a href="{{ url_for('edit_article', title=article['title']) }}">Edit</a>
+        <a href="{{ url_for('delete_article', title=article['title']) }}"
+          >Delete</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{{ url_for('home') }}">Back to Home</a>
+  </body>
+</html>
