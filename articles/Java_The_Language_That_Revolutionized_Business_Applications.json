@@ -1,0 +1,13 @@
+{
+  "title": "Java: The Language That Revolutionized Business Applications",
+  "content": "Java was created in 1991 by James Gosling and his team at Sun Microsystems. Initially named Oak, the language was designed to support the development of interactive applications for embedded systems. Renamed Java in 1995, the language quickly became a staple in enterprise environments due to its portability \u2013 the famous \"write once, run anywhere\" principle. Java is the foundation for millions of applications, from Android apps to large-scale banking systems, and remains a top choice for backend development.",
+  "date": "2024-01-01",
+  "tags": [
+    "Java",
+    "Programming",
+    "History",
+    "Enterprise Development",
+    "Android"
+  ],
+  "featured": false
+}

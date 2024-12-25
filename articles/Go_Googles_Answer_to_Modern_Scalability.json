@@ -1,0 +1,13 @@
+{
+  "title": "Go: Google\u2019s Answer to Modern Scalability",
+  "content": "In 2007, Google introduced Go, or Golang, to address the challenges of building scalable and efficient systems. Created by Robert Griesemer, Rob Pike, and Ken Thompson, Go simplifies concurrent programming and offers incredible speed. Go is the backbone of modern infrastructure tools like Docker and Kubernetes, making it indispensable for cloud computing and large-scale backend systems.",
+  "date": "2024-07-07",
+  "tags": [
+    "Go",
+    "Cloud Computing",
+    "Backend Development",
+    "Docker",
+    "Kubernetes"
+  ],
+  "featured": false
+}
