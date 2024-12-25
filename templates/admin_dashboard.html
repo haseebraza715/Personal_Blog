@@ -7,17 +7,31 @@
   <body>
     <h1>Admin Dashboard</h1>
     <a href="{{ url_for('new_article') }}">+ Add New Article</a>
+    <script>
+      function confirmDelete(event) {
+        if (!confirm("Are you sure you want to delete this article?")) {
+          event.preventDefault();
+        }
+      }
+    </script>
+
     <ul>
       {% for article in articles %}
       <li>
-        {{ article['titleh'] }} - {{ article['date'] }}
+        {{ article['title'] }} - {{ article['date'] }}
         <a href="{{ url_for('edit_article', title=article['title']) }}">Edit</a>
-        <a href="{{ url_for('delete_article', title=article['title']) }}"
-          >Delete</a
+        <form
+          action="{{ url_for('delete_article', title=article['title']) }}"
+          method="POST"
+          style="display: inline"
+          onsubmit="confirmDelete(event);"
         >
+          <button type="submit">Delete</button>
+        </form>
       </li>
       {% endfor %}
     </ul>
+
     <a href="{{ url_for('home') }}">Back to Home</a>
   </body>
 </html>
