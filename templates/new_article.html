@@ -14,12 +14,14 @@
         font-family: "Georgia", serif;
         background-color: #1e1e2e;
         color: #d1d1e0;
+        margin: 0;
+        padding: 0;
       }
 
       .navbar {
         background-color: #28293e;
         border-bottom: 1px solid #444;
-        padding: 0.5rem 1rem;
+        padding: 0.8rem 1rem;
       }
 
       .navbar-brand {
@@ -38,20 +40,32 @@
       }
 
       .container {
-        max-width: 600px;
-        margin: 50px auto;
+        max-width: 700px;
+        margin: 60px auto;
         background-color: #28293e;
         border-radius: 10px;
-        padding: 30px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        padding: 30px 40px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       h1 {
-        font-size: 1.8rem;
+        font-size: 2rem;
         font-weight: bold;
         color: #a5d6a7;
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
       }
 
       label {
@@ -63,56 +77,96 @@
       input[type="date"],
       textarea {
         width: 100%;
-        padding: 10px;
+        padding: 12px;
         margin-bottom: 20px;
         border: 1px solid #444;
         border-radius: 5px;
         background-color: #1e1e2e;
         color: #d1d1e0;
+        font-size: 1rem;
       }
 
       input:focus,
       textarea:focus {
         outline: none;
         border-color: #a5d6a7;
-        box-shadow: 0 0 5px rgba(165, 214, 167, 0.8);
+        box-shadow: 0 0 8px rgba(165, 214, 167, 0.8);
       }
 
       button {
         background-color: #a5d6a7;
         color: #1e1e2e;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border: none;
         border-radius: 5px;
         font-weight: bold;
         cursor: pointer;
         width: 100%;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
       }
 
       button:hover {
         background-color: #8ac09d;
       }
 
-      .back-link {
+      a.back-link {
         display: block;
         text-align: center;
         margin-top: 20px;
         color: #a5d6a7;
         text-decoration: none;
         font-weight: bold;
+        transition: color 0.3s ease;
       }
 
-      .back-link:hover {
-        text-decoration: underline;
+      a.back-link:hover {
+        color: #8ac09d;
       }
 
       footer {
         background-color: #28293e;
         color: #8b949e;
         font-size: 0.9rem;
-        padding: 20px 0;
+        padding: 15px 0;
         text-align: center;
         border-top: 1px solid #444;
+        margin-top: 50px;
+      }
+
+      footer a {
+        color: #a5d6a7;
+        text-decoration: none;
+      }
+
+      footer a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 576px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 1.6rem;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        textarea {
+          font-size: 0.9rem;
+          padding: 10px;
+        }
+
+        button {
+          font-size: 1rem;
+        }
+
+        label {
+          font-size: 0.9rem;
+        }
       }
     </style>
   </head>
@@ -144,6 +198,7 @@
             id="title"
             name="title"
             class="form-control"
+            placeholder="Enter a compelling title"
             required
           />
         </div>
@@ -155,6 +210,7 @@
             name="content"
             rows="10"
             class="form-control"
+            placeholder="Write the article content here..."
             required
           ></textarea>
         </div>
@@ -167,6 +223,16 @@
             name="date"
             class="form-control"
             required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="tags" class="form-label">Tags (comma-separated):</label>
+          <input
+            type="text"
+            id="tags"
+            name="tags"
+            placeholder="e.g., Python, Flask, Technology"
+            class="form-control"
           />
         </div>
 

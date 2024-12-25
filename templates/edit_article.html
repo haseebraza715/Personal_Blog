@@ -161,6 +161,17 @@
 {{ article['content'] }}</textarea
           >
         </div>
+        <div class="mb-3">
+          <label for="tags">Tags (comma-separated):</label>
+          <input
+            type="text"
+            id="tags"
+            name="tags"
+            value="{{ ', '.join(article['tags']) }}"
+            placeholder="e.g., Python, Flask, Technology"
+            class="form-control"
+          />
+        </div>
 
         <div class="mb-3">
           <label for="date" class="form-label">Date</label>

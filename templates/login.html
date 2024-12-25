@@ -25,7 +25,7 @@
         background-color: #28293e;
         padding: 30px;
         border-radius: 10px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
         width: 100%;
         max-width: 400px;
       }
@@ -35,6 +35,8 @@
         color: #a5d6a7;
         font-size: 1.8rem;
         margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
       }
 
       label {
@@ -53,40 +55,89 @@
         border-radius: 5px;
         background-color: #1e1e2e;
         color: #d1d1e0;
+        font-size: 1rem;
       }
 
       input:focus {
         outline: none;
         border-color: #a5d6a7;
         box-shadow: 0 0 5px rgba(165, 214, 167, 0.8);
+        transition: all 0.3s ease-in-out;
       }
 
       button {
         background-color: #a5d6a7;
         color: #1e1e2e;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border: none;
         border-radius: 5px;
         font-weight: bold;
         cursor: pointer;
         width: 100%;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
       }
 
       button:hover {
         background-color: #8ac09d;
       }
 
+      .error-message {
+        background-color: #d9534f;
+        color: #fff;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .register-link {
+        text-align: center;
+        margin-top: 15px;
+        font-size: 0.9rem;
+      }
+
+      .register-link a {
+        color: #a5d6a7;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .register-link a:hover {
+        text-decoration: underline;
+        color: #8ac09d;
+      }
+
       .footer {
         text-align: center;
-        margin-top: 10px;
+        margin-top: 20px;
         color: #8b949e;
         font-size: 0.9rem;
+      }
+
+      @media (max-width: 576px) {
+        .login-container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        button {
+          font-size: 0.9rem;
+          padding: 10px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="login-container">
       <h1>Admin Login</h1>
+      <!-- Display error message if it exists -->
+      {% if error %}
+      <div class="error-message">{{ error }}</div>
+      {% endif %}
       <form method="POST" action="{{ url_for('login') }}">
         <div class="mb-3">
           <label for="username">Username</label>
@@ -98,6 +149,13 @@
         </div>
         <button type="submit" class="btn btn-success">Login</button>
       </form>
+
+      <!-- Register link -->
+      <div class="register-link">
+        Don't have an account?
+        <a href="{{ url_for('register') }}">Register here</a>
+      </div>
+
       <div class="footer">&copy; 2024 Personal Blog. All rights reserved.</div>
     </div>
     <!-- Bootstrap JS -->
