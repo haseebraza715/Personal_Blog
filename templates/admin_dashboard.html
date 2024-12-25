@@ -2,40 +2,170 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
+    <!-- Bootstrap CSS -->
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
     />
+    <style>
+      body {
+        font-family: "Georgia", serif;
+        background-color: #1e1e2e;
+        color: #d1d1e0;
+      }
+
+      .navbar {
+        background-color: #28293e;
+        border-bottom: 1px solid #444;
+      }
+
+      .navbar-brand {
+        font-weight: bold;
+        font-size: 1.5rem;
+        color: #a5d6a7 !important;
+      }
+
+      .navbar-nav .nav-link {
+        font-size: 1rem;
+        color: #d1d1e0;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #a5d6a7;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #a5d6a7;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .add-article {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .add-article a {
+        color: #1e1e2e;
+        background-color: #a5d6a7;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .add-article a:hover {
+        background-color: #8ac09d;
+      }
+
+      .list-group-item {
+        background-color: #28293e;
+        border: 1px solid #444;
+        color: #d1d1e0;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+      }
+
+      .list-group-item a {
+        color: #a5d6a7;
+        text-decoration: none;
+        margin-right: 15px;
+      }
+
+      .list-group-item a:hover {
+        text-decoration: underline;
+      }
+
+      .btn-danger {
+        background-color: #d9534f;
+        border-color: #d9534f;
+      }
+
+      .btn-danger:hover {
+        background-color: #c9302c;
+        border-color: #ac2925;
+      }
+
+      footer {
+        background-color: #28293e;
+        color: #8b949e;
+        font-size: 0.9rem;
+        padding: 20px 0;
+        text-align: center;
+        border-top: 1px solid #444;
+      }
+    </style>
   </head>
   <body>
-    <h1>Admin Dashboard</h1>
-    <a href="{{ url_for('new_article') }}">+ Add New Article</a>
-    <script>
-      function confirmDelete(event) {
-        if (!confirm("Are you sure you want to delete this article?")) {
-          event.preventDefault();
-        }
-      }
-    </script>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('home') }}">Personal Blog</a>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-    <ul>
-      {% for article in articles %}
-      <li>
-        {{ article['title'] }} - {{ article['date'] }}
-        <a href="{{ url_for('edit_article', title=article['title']) }}">Edit</a>
-        <form
-          action="{{ url_for('delete_article', title=article['title']) }}"
-          method="POST"
-          style="display: inline"
-          onsubmit="confirmDelete(event);"
+    <!-- Main Content -->
+    <div class="container">
+      <h1>Admin Dashboard</h1>
+      <div class="add-article">
+        <a href="{{ url_for('new_article') }}">+ Add New Article</a>
+      </div>
+      <ul class="list-group">
+        {% for article in articles %}
+        <li class="list-group-item">
+          <span>
+            <strong>{{ article['title'] }}</strong> - {{ article['date'] }}
+          </span>
+          <span>
+            <a
+              href="{{ url_for('edit_article', title=article['title']) }}"
+              class="btn btn-outline-light btn-sm"
+              >Edit</a
+            >
+            <form
+              action="{{ url_for('delete_article', title=article['title']) }}"
+              method="POST"
+              style="display: inline"
+              onsubmit="return confirm('Are you sure you want to delete this article?');"
+            >
+              <button type="submit" class="btn btn-danger btn-sm">
+                Delete
+              </button>
+            </form>
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+      <div class="text-center mt-4">
+        <a href="{{ url_for('home') }}" class="btn btn-outline-light"
+          >Back to Home</a
         >
-          <button type="submit">Delete</button>
-        </form>
-      </li>
-      {% endfor %}
-    </ul>
+      </div>
+    </div>
 
-    <a href="{{ url_for('home') }}">Back to Home</a>
+    <!-- Footer -->
+    <footer>&copy; 2024 Personal Blog. All rights reserved.</footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
