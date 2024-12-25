@@ -4,21 +4,17 @@ import json
 
 app = Flask(__name__)
 
-# Directory for storing articles
 ARTICLES_DIR = "articles"
 
-# Ensure the articles directory exists
 if not os.path.exists(ARTICLES_DIR):
     os.makedirs(ARTICLES_DIR)
 
-# Helper function to load articles
 def load_articles():
     articles = []
     for filename in os.listdir(ARTICLES_DIR):
         if filename.endswith(".json"):
             with open(os.path.join(ARTICLES_DIR, filename), "r") as file:
                 articles.append(json.load(file))
-    # Sort articles by date (most recent first)
     return sorted(articles, key=lambda x: x["date"], reverse=True)
 
 @app.route('/')
