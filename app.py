@@ -4,7 +4,7 @@ import json
 from markupsafe import Markup
 
 app = Flask(__name__)
-app.secret_key = "your_secret_key"  
+# app.secret_key = ""  
 
 COMMENTS_DIR = "comments"
 if not os.path.exists(COMMENTS_DIR):
@@ -115,7 +115,7 @@ def admin_required(func):
 @app.route('/admin')
 @admin_required
 def admin_dashboard():
-    articles = load_articles()  # Reload all articles to reflect changes
+    articles = load_articles()  
     total_articles = len(articles)
 
     tag_counts = {}
@@ -150,20 +150,16 @@ def new_article():
         tags = [tag.strip() for tag in tags if tag.strip()]
         featured = "featured" in request.form
 
-        # Validate required fields
         if not title or not content or not date:
             return render_template("new_article.html", error="Title, content, and date are required.")
 
-        # Sanitize the title for file naming
         from werkzeug.utils import secure_filename
         filename = secure_filename(f"{title}.json")
         filepath = os.path.join(ARTICLES_DIR, filename)
 
-        # Prevent overwriting
         if os.path.exists(filepath):
             return render_template("new_article.html", error="An article with this title already exists.")
 
-        # Save the article
         try:
             with open(filepath, "w") as file:
                 json.dump(
@@ -258,27 +254,21 @@ def add_comment(title):
 @app.route('/admin/toggle_featured/<title>', methods=["POST"])
 @admin_required
 def toggle_featured(title):
-    # Construct the filepath
     filepath = os.path.join(ARTICLES_DIR, f"{title.replace(' ', '_')}.json")
     
-    # Check if the file exists
     if os.path.exists(filepath):
-        # Open the file and read its contents
         with open(filepath, "r") as file:
-            article = json.load(file)  # Load the JSON data
+            article = json.load(file)  
 
-        # Toggle the 'featured' status
         article['featured'] = not article.get('featured', False)
 
-        # Write the updated article back to the file
         with open(filepath, "w") as file:
-            json.dump(article, file)  # Save the updated data
+            json.dump(article, file) 
         
         print(f"Article '{title}' updated. Featured status: {article['featured']}")
     else:
         print(f"Error: Article file '{title}' not found!")
 
-    # Redirect back to the admin dashboard
     return redirect(url_for('admin_dashboard'))
 
 
