@@ -4,7 +4,6 @@ import json
 from markupsafe import Markup
 
 app = Flask(__name__)
-# app.secret_key = ""  
 
 COMMENTS_DIR = "comments"
 if not os.path.exists(COMMENTS_DIR):
